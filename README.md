@@ -62,3 +62,42 @@ NEXT_PUBLIC_API_URL=http://localhost:5000/api
 | `npm install` | Install all dependencies |
 | `npm run dev` | Start all apps |
 | `npm run build` | Build all apps |
+
+---
+
+## 🔧 Prerequisites & Setup
+
+**1. Node.js** (v18 or above)
+```bash
+node -v
+```
+
+**2. Turborepo**
+```bash
+npm install -g turbo
+```
+
+**3. Install all workspace dependencies**
+```bash
+npm install
+```
+
+**4. Set up Next.js in `apps/web`**
+```bash
+cd apps/web
+npx create-next-app@latest . --typescript --tailwind --app --no-src-dir
+```
+
+**5. Set up Express.js in `apps/api`**
+```bash
+cd apps/api
+npm init -y
+npm install express mongoose dotenv jsonwebtoken bcryptjs cors helmet morgan
+npm install -D typescript ts-node-dev @types/express @types/node @types/cors @types/morgan @types/bcryptjs @types/jsonwebtoken
+```
+
+**6. Start development**
+```bash
+# From root — starts all apps
+npm run dev
+```

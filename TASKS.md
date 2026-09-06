@@ -1,16 +1,16 @@
 # Dia Desk — Tasks
 
 ## Monorepo Setup
-- [x] create github repo — single repo for everything
-- [x] root package.json with workspaces — tells npm about apps/ and packages/
-- [x] turbo.json — tells turborepo the build order
-- [x] .gitignore — keeps node_modules and .env off github
-- [x] apps/ and packages/ folder structure — skeleton of the monorepo
+- ✅ create github repo — single repo for everything
+- ✅ root package.json with workspaces — tells npm about apps/ and packages/
+- ✅ turbo.json — tells turborepo the build order
+- ✅ .gitignore — keeps node_modules and .env off github
+- ✅ apps/ and packages/ folder structure — skeleton of the monorepo
 
 ---
 
 ## Frontend Setup
-- [x] next.js 16 in apps/web — base project created with create-next-app
+- ✅ next.js 16 in apps/web — base project created with create-next-app
 - [ ] run on localhost:3000 — confirm it works before touching anything
 - [ ] delete default boilerplate in page.tsx — start with a blank page
 - [ ] create page folder structure — all the routes the app will have

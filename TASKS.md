@@ -1,127 +1,202 @@
-# 📋 Dia Desk — Task Board
+# Dia Desk — Tasks
 
-> **How this works:**
-> - 🤖 = I set it up for you (scaffolding, config, boilerplate)
-> - 👨‍💻 = You build it (actual feature code, learning by doing)
-> - ✅ = Done
-> - 🔄 = In progress
-> - ⏳ = Not started yet
-
----
-
-## ✅ Phase 1 — Monorepo Skeleton
-| Task | Who | Status |
-|---|---|---|
-| Create GitHub repo `dia-desk` | 👨‍💻 You | ✅ Done |
-| Root `package.json` with workspaces | 🤖 Me | ✅ Done |
-| `turbo.json` pipeline config | 🤖 Me | ✅ Done |
-| `.gitignore` | 🤖 Me | ✅ Done |
-| `apps/` and `packages/` folders | 🤖 Me | ✅ Done |
-| First push to GitHub | 👨‍💻 You | ✅ Done |
+## Monorepo Setup
+- [x] create github repo — single repo for everything
+- [x] root package.json with workspaces — tells npm about apps/ and packages/
+- [x] turbo.json — tells turborepo the build order
+- [x] .gitignore — keeps node_modules and .env off github
+- [x] apps/ and packages/ folder structure — skeleton of the monorepo
 
 ---
 
-## ✅ Phase 2 — Frontend Base (Next.js 16)
-| Task | Who | Status |
-|---|---|---|
-| Run `create-next-app` in `apps/web` | 🤖 Me | ✅ Done |
-| Confirm it runs on `localhost:3000` | 👨‍💻 You | ⏳ |
-| Delete the default boilerplate in `page.tsx` | 👨‍💻 You | ⏳ |
-
-> **Your task:** Open terminal → `cd apps/web` → `npm run dev` → open `localhost:3000`
-
----
-
-## ⏳ Phase 3 — Frontend Page Structure
-| Task | Who | Status |
-|---|---|---|
-| Create App Router folder structure | 🤖 Me | ⏳ |
-| `(auth)/login/page.tsx` — Login page shell | 👨‍💻 You | ⏳ |
-| `(dashboard)/layout.tsx` — Sidebar layout shell | 👨‍💻 You | ⏳ |
-| `dashboard/page.tsx` — Empty dashboard page | 👨‍💻 You | ⏳ |
-| `employees/page.tsx` — Empty employees page | 👨‍💻 You | ⏳ |
-| `timesheets/page.tsx` — Empty timesheets page | 👨‍💻 You | ⏳ |
-| `leaves/page.tsx` — Empty leaves page | 👨‍💻 You | ⏳ |
+## Frontend Setup
+- [x] next.js 16 in apps/web — base project created with create-next-app
+- [ ] run on localhost:3000 — confirm it works before touching anything
+- [ ] delete default boilerplate in page.tsx — start with a blank page
+- [ ] create page folder structure — all the routes the app will have
+- [ ] (auth)/login/page.tsx — the login screen
+- [ ] (dashboard)/layout.tsx — the shared sidebar + navbar that wraps all pages
+- [ ] (dashboard)/dashboard/page.tsx — home screen after login
+- [ ] (dashboard)/employees/page.tsx — list of all employees
+- [ ] (dashboard)/employees/[id]/page.tsx — individual employee profile
+- [ ] (dashboard)/timesheets/page.tsx — weekly time log
+- [ ] (dashboard)/leaves/page.tsx — leave applications and status
+- [ ] (dashboard)/settings/page.tsx — company and policy config
+- [ ] globals.css cleanup — remove unused styles
+- [ ] custom fonts — add a proper font (inter or outfit via google fonts)
+- [ ] tailwind theme config — custom colors and spacing in tailwind.config
 
 ---
 
-## ⏳ Phase 4 — Backend Base (Express.js)
-| Task | Who | Status |
-|---|---|---|
-| `package.json` for `apps/api` | 🤖 Me | ⏳ |
-| `tsconfig.json` for `apps/api` | 🤖 Me | ⏳ |
-| `src/app.ts` — Express app setup | 🤖 Me | ⏳ |
-| `src/server.ts` — Entry point | 🤖 Me | ⏳ |
-| `src/config/db.ts` — MongoDB connection | 🤖 Me | ⏳ |
-| `src/config/env.ts` — Typed env vars | 🤖 Me | ⏳ |
-| Test API runs on `localhost:5000` | 👨‍💻 You | ⏳ |
-| Add `/api/health` route yourself | 👨‍💻 You | ⏳ |
-
-> **Your task:** After setup, add a simple health check route in `src/routes/health.routes.ts`
-> ```ts
-> router.get('/health', (req, res) => {
->   res.json({ status: 'ok' })
-> })
-> ```
+## Frontend — Components
+- [ ] sidebar — left nav with links to all pages
+- [ ] topbar — top bar with user avatar and notifications
+- [ ] stat card — reusable card showing a number + label (used on dashboard)
+- [ ] data table — table with sort, search, pagination
+- [ ] modal — popup dialog used for forms
+- [ ] input — styled text input used in all forms
+- [ ] button — primary, secondary, danger variants
+- [ ] badge — small colored label (e.g. "Pending", "Approved")
+- [ ] avatar — user profile picture with fallback initials
+- [ ] loading spinner — shown while fetching data
+- [ ] empty state — shown when a list has no items
+- [ ] pagination — next/prev buttons for tables
 
 ---
 
-## ⏳ Phase 5 — Auth (Backend)
-| Task | Who | Status |
-|---|---|---|
-| `User` Mongoose model | 🤖 Me | ⏳ |
-| Auth service (register/login logic) | 🤖 Me | ⏳ |
-| Auth controller (HTTP layer) | 🤖 Me | ⏳ |
-| Auth routes | 🤖 Me | ⏳ |
-| JWT middleware | 🤖 Me | ⏳ |
-| Test register with Postman/Thunder Client | 👨‍💻 You | ⏳ |
-| Test login with Postman/Thunder Client | 👨‍💻 You | ⏳ |
+## Frontend — Auth
+- [ ] login form — email and password fields
+- [ ] form validation — show errors if fields are empty or wrong
+- [ ] api call on submit — POST to /api/auth/login
+- [ ] store token — save jwt in localstorage after login
+- [ ] redirect — go to /dashboard after successful login
+- [ ] protected routes — if no token, redirect to /login (middleware.ts)
+- [ ] logout — clear token and redirect to login
 
 ---
 
-## ⏳ Phase 6 — Auth (Frontend)
-| Task | Who | Status |
-|---|---|---|
-| Axios instance with interceptors | 🤖 Me | ⏳ |
-| Login form UI | 👨‍💻 You | ⏳ |
-| Connect login form to API | 👨‍💻 You | ⏳ |
-| Store token in localStorage | 👨‍💻 You | ⏳ |
-| Redirect to dashboard after login | 👨‍💻 You | ⏳ |
+## Frontend — Dashboard
+- [ ] total employees card — fetch count from api
+- [ ] pending leaves card — how many leaves waiting for approval
+- [ ] hours this week card — total hours logged by logged-in user
+- [ ] recent activity — list of latest actions
 
 ---
 
-## ⏳ Phase 7 — Employee Management
-| Task | Who | Status |
-|---|---|---|
-| Employee model (Mongoose) | 🤖 Me | ⏳ |
-| Employee CRUD API | 🤖 Me | ⏳ |
-| Employee list page UI | 👨‍💻 You | ⏳ |
-| Employee profile page UI | 👨‍💻 You | ⏳ |
+## Frontend — Employees
+- [ ] employee list — table of all employees with search and department filter
+- [ ] employee row component — one row in the table
+- [ ] employee detail — full profile page for a single employee
+- [ ] add employee form — admin fills this to create a new employee
+- [ ] edit employee — update name, department, role etc
+- [ ] deactivate employee — soft delete, does not remove from db
 
 ---
 
-## ⏳ Phase 8 — Timesheets
-| Task | Who | Status |
-|---|---|---|
-| Timesheet model & API | 🤖 Me | ⏳ |
-| Weekly grid UI | 👨‍💻 You | ⏳ |
-| Clock in/out button | 👨‍💻 You | ⏳ |
+## Frontend — Timesheets
+- [ ] weekly grid — 7 columns (mon to sun) with hours logged per day
+- [ ] add entry form — date, project, task, hours
+- [ ] edit / delete entry — only allowed for draft entries
+- [ ] submit button — submits the whole week for manager review
+- [ ] total hours — live counter of hours logged that week
+- [ ] manager view — table of submitted timesheets to approve or reject
 
 ---
 
-## ⏳ Phase 9 — Leave Management
-| Task | Who | Status |
-|---|---|---|
-| Leave model & API | 🤖 Me | ⏳ |
-| Leave application form UI | 👨‍💻 You | ⏳ |
-| Leave balance card UI | 👨‍💻 You | ⏳ |
-| Approval flow UI (manager view) | 👨‍💻 You | ⏳ |
+## Frontend — Leaves
+- [ ] balance cards — shows remaining days for paid, sick, casual
+- [ ] apply form — type, start date, end date, reason
+- [ ] my leaves list — history of all leave requests
+- [ ] cancel leave — only for pending requests
+- [ ] manager approval list — pending leaves from team members
+- [ ] approve / reject — manager clicks a button with optional note
 
 ---
 
-## 💡 Ground Rules
+## Frontend — API Connection
+- [ ] axios instance — base url set, ready to make requests
+- [ ] request interceptor — automatically adds auth token to every request
+- [ ] response interceptor — if 401 received, log user out
+- [ ] react query setup — for caching and syncing server data
+- [ ] auth hooks — useLogin, useRegister, useLogout
+- [ ] employee hooks — useEmployees, useEmployee, useCreateEmployee
+- [ ] timesheet hooks — useTimesheet, useAddEntry, useSubmitWeek
+- [ ] leave hooks — useLeaves, useApplyLeave, useReviewLeave
 
-1. **I scaffold, you code features** — I set up the boring config. You write the UI and connect things.
-2. **One phase at a time** — Don't move to the next phase until the current one works.
-3. **Test as you go** — Every phase ends with you testing it manually before we move on.
-4. **Ask questions freely** — If something doesn't make sense, ask before coding.
+---
+
+## Backend Setup
+- [ ] package.json — dependencies: express, mongoose, jwt, bcrypt, cors, helmet, zod
+- [ ] tsconfig.json — typescript config for node
+- [ ] server.ts — starts the http server on PORT from .env
+- [ ] app.ts — express app, registers middleware and routes
+- [ ] cors — allow requests from frontend url
+- [ ] helmet — adds security headers
+- [ ] morgan — logs every incoming request
+- [ ] mongodb connection — connect to atlas using MONGODB_URI from .env
+- [ ] env validation — fail at startup if any required env var is missing
+- [ ] confirm api runs on localhost:5000
+
+---
+
+## Backend — Middlewares
+- [ ] error handler — catches all errors and sends clean json response
+- [ ] jwt auth — verifies token on protected routes
+- [ ] role guard — blocks access if user role is not allowed
+- [ ] request validator — validates req.body using zod schema
+
+---
+
+## Backend — Auth
+- [ ] user model — name, email, password (hashed), role, department, joinDate
+- [ ] hash password on save — bcrypt pre-save hook in mongoose
+- [ ] register — create user, return tokens
+- [ ] login — check password, return tokens
+- [ ] refresh token — issue new access token using refresh token
+- [ ] logout — clear refresh token in db
+- [ ] get me — return logged-in user's profile
+- [ ] test register in postman
+- [ ] test login in postman
+
+---
+
+## Backend — Employees
+- [ ] get all — paginated list with department and role filter
+- [ ] get one — single employee by id
+- [ ] create — admin/hr only
+- [ ] update — change name, department, designation etc
+- [ ] deactivate — set isActive to false
+- [ ] test all endpoints in postman
+
+---
+
+## Backend — Timesheets
+- [ ] timesheet model — employeeId, date, project, task, hours, status, weekStart
+- [ ] add entry — create a draft entry
+- [ ] get weekly — fetch all entries for a given week
+- [ ] submit week — change all drafts for that week to "submitted"
+- [ ] approve — manager sets status to "approved"
+- [ ] reject — manager sets status to "rejected"
+- [ ] delete entry — only if status is "draft"
+- [ ] test all endpoints
+
+---
+
+## Backend — Leaves
+- [ ] leave model — employeeId, type, startDate, endDate, totalDays, status
+- [ ] apply — create new leave request, check for overlaps
+- [ ] get my leaves — all leaves for logged-in user
+- [ ] get pending — all pending leaves (for managers)
+- [ ] manager approve/reject — first level approval
+- [ ] hr approve/reject — second level approval
+- [ ] cancel — employee cancels their own pending leave
+- [ ] test all endpoints
+
+---
+
+## Shared Packages
+- [ ] packages/types — Employee, TimesheetEntry, LeaveRequest interfaces
+- [ ] packages/types — zod schemas used in both api validation and frontend forms
+- [ ] packages/utils — getWeekStart, formatDate, getWorkingDays
+- [ ] packages/utils — getInitials, toTitleCase
+
+---
+
+## Deployment
+- [ ] deploy apps/web to vercel — connect github repo, auto deploys on push
+- [ ] deploy apps/api to render — connect github repo, set start command
+- [ ] set render env vars — MONGODB_URI, JWT_SECRET, JWT_REFRESH_SECRET, NODE_ENV
+- [ ] set vercel env vars — NEXT_PUBLIC_API_URL pointing to render url
+- [ ] test api on render url
+- [ ] test frontend on vercel url
+- [ ] confirm login flow works on production
+- [ ] confirm data loads from real mongodb atlas
+
+---
+
+## Final Polish
+- [ ] add loading skeletons on all data tables
+- [ ] add error messages when api calls fail
+- [ ] test all pages on mobile screen size
+- [ ] fix any layout issues
+- [ ] review all forms for edge cases

@@ -13,7 +13,7 @@
 - ✅ next.js 16 in apps/web — base project created with create-next-app
 - ✅ fix turbo 2.x workspace error — added packageManager field to root package.json
 - ✅ run on localhost:3000 — confirmed working
-- [ ] delete default boilerplate in page.tsx — start with a blank page
+- ✅ delete default boilerplate in page.tsx — start with a blank page
 - [ ] create page folder structure — all the routes the app will have
 - [ ] (auth)/login/page.tsx — the login screen
 - [ ] (dashboard)/layout.tsx — the shared sidebar + navbar that wraps all pages

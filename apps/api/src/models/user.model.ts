@@ -1,85 +1,41 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcryptjs";
-import {
-  UserRole,
-  Gender,
-  EmploymentType,
-  EmploymentStatus,
-} from "../enums";
-
-// ─── Interface ────────────────────────────────────────────────────────────────
-
-export interface IUser extends Document {
-  _id: mongoose.Types.ObjectId;
-
-  // tenant reference
-  companyId: mongoose.Types.ObjectId;
-
-  // org references
-  departmentId?: mongoose.Types.ObjectId;
-  managerId?:    mongoose.Types.ObjectId;
-
-  // personal info
-  name:     string;
-  email:    string;
-  password: string;
-  phone?:   string;
-  avatar?:  string;
-  dob?:     Date;
-  gender?:  Gender;
-
-  // employment info
-  role:             UserRole;
-  designation:      string;
-  employmentType:   EmploymentType;
-  employmentStatus: EmploymentStatus;
-  joinDate:         Date;
-
-  // auth
-  isActive:      boolean;
-  refreshToken?: string;
-
-  // timestamps
-  createdAt: Date;
-  updatedAt: Date;
-
-  // methods
-  comparePassword(candidate: string): Promise<boolean>;
-}
+import { UserRole, Gender, EmploymentType, EmploymentStatus } from "../enums";
+import { IUser } from "../interfaces/user.interface";
 
 // ─── Schema ───────────────────────────────────────────────────────────────────
 
 const UserSchema = new Schema<IUser>(
   {
     companyId: {
-      type:     Schema.Types.ObjectId,
-      ref:      "Company",
+      type: Schema.Types.ObjectId,
+      ref: "Company",
       required: true,
-      index:    true,
+      index: true,
     },
     departmentId: {
       type: Schema.Types.ObjectId,
-      ref:  "Department",
+      ref: "Department",
     },
     managerId: {
       type: Schema.Types.ObjectId,
-      ref:  "User",
+      ref: "User",
     },
     name: {
-      type:     String,
+      type: String,
       required: true,
-      trim:     true,
+      trim: true,
     },
     email: {
-      type:      String,
-      required:  true,
+      type: String,
+      required: true,
       lowercase: true,
-      trim:      true,
+      trim: true,
     },
     password: {
-      type:     String,
+      type: String,
       required: true,
-      select:   false,
+      select: false,
     },
     phone: {
       type: String,
@@ -96,35 +52,35 @@ const UserSchema = new Schema<IUser>(
       enum: Object.values(Gender),
     },
     role: {
-      type:    String,
-      enum:    Object.values(UserRole),
+      type: String,
+      enum: Object.values(UserRole),
       default: UserRole.EMPLOYEE,
     },
     designation: {
-      type:     String,
+      type: String,
       required: true,
-      trim:     true,
+      trim: true,
     },
     employmentType: {
-      type:    String,
-      enum:    Object.values(EmploymentType),
+      type: String,
+      enum: Object.values(EmploymentType),
       default: EmploymentType.FULL_TIME,
     },
     employmentStatus: {
-      type:    String,
-      enum:    Object.values(EmploymentStatus),
+      type: String,
+      enum: Object.values(EmploymentStatus),
       default: EmploymentStatus.ACTIVE,
     },
     joinDate: {
-      type:     Date,
+      type: Date,
       required: true,
     },
     isActive: {
-      type:    Boolean,
+      type: Boolean,
       default: true,
     },
     refreshToken: {
-      type:   String,
+      type: String,
       select: false,
     },
   },

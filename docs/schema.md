@@ -272,3 +272,25 @@ Manager reviews → APPROVED or REJECTED
 3. A user can only belong to one company
 4. Company admins can invite users to their company
 5. No cross-company data access is ever possible through the API
+
+---
+
+### Salary
+One record per salary revision. A new record is created on every raise or change — history is never overwritten.
+
+| Field | Type | Description |
+|---|---|---|
+| `_id` | ObjectId | primary key |
+| `companyId` | ObjectId | which company |
+| `employeeId` | ObjectId | which employee |
+| `amount` | Number | salary amount |
+| `currency` | String | e.g. "INR", "USD" |
+| `salaryType` | String | `MONTHLY` \| `ANNUAL` \| `HOURLY` |
+| `effectiveDate` | Date | when this salary came into effect |
+| `payGrade` | String | optional — e.g. "L3", "Senior" |
+| `allowances` | Object | optional — `{ hra, transport, medical }` |
+| `deductions` | Object | optional — `{ pf, tax }` |
+| `createdAt` | Date | auto |
+
+> Salary is never stored on the User model. Each revision is a new document, so full salary history is preserved.
+> Access restricted to `COMPANY_ADMIN` and `HR_MANAGER` only.

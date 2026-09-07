@@ -1,69 +1,112 @@
 import mongoose, { Document, Schema } from "mongoose";
 import bcrypt from "bcryptjs";
 
-export type UserRole = "COMPANY_ADMIN" | "HR_MANAGER" | "MANAGER" | "EMPLOYEE";
+// ─── Enums ────────────────────────────────────────────────────────────────────
+
+export enum UserRole {
+  COMPANY_ADMIN = "COMPANY_ADMIN",
+  HR_MANAGER    = "HR_MANAGER",
+  MANAGER       = "MANAGER",
+  EMPLOYEE      = "EMPLOYEE",
+}
+
+export enum Gender {
+  MALE   = "MALE",
+  FEMALE = "FEMALE",
+  OTHER  = "OTHER",
+}
+
+export enum EmploymentType {
+  FULL_TIME  = "FULL_TIME",
+  PART_TIME  = "PART_TIME",
+  CONTRACT   = "CONTRACT",
+  INTERN     = "INTERN",
+}
+
+export enum EmploymentStatus {
+  ACTIVE     = "ACTIVE",
+  INACTIVE   = "INACTIVE",
+  TERMINATED = "TERMINATED",
+}
+
+// ─── Interface ────────────────────────────────────────────────────────────────
 
 export interface IUser extends Document {
   _id: mongoose.Types.ObjectId;
+
+  // tenant reference
   companyId: mongoose.Types.ObjectId;
+
+  // org references
   departmentId?: mongoose.Types.ObjectId;
-  managerId?: mongoose.Types.ObjectId;
-  name: string;
-  email: string;
-  password: string;
-  role: UserRole;
-  designation: string;
-  phone?: string;
-  avatar?: string;
-  isActive: boolean;
+  managerId?:    mongoose.Types.ObjectId;
+
+  // personal info
+  name:        string;
+  email:       string;
+  password:    string;
+  phone?:      string;
+  avatar?:     string;
+  dob?:        Date;
+  gender?:     Gender;
+
+  // employment info
+  role:             UserRole;
+  designation:      string;
+  employmentType:   EmploymentType;
+  employmentStatus: EmploymentStatus;
+  joinDate:         Date;
+
+  // auth
+  isActive:      boolean;
   refreshToken?: string;
-  joinDate: Date;
+
+  // timestamps
   createdAt: Date;
   updatedAt: Date;
+
+  // methods
   comparePassword(candidate: string): Promise<boolean>;
 }
 
+// ─── Schema ───────────────────────────────────────────────────────────────────
+
 const UserSchema = new Schema<IUser>(
   {
+    // tenant
     companyId: {
-      type: Schema.Types.ObjectId,
-      ref: "Company",
+      type:     Schema.Types.ObjectId,
+      ref:      "Company",
       required: true,
-      index: true,
+      index:    true,
     },
+
+    // org structure
     departmentId: {
       type: Schema.Types.ObjectId,
-      ref: "Department",
+      ref:  "Department",
     },
     managerId: {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref:  "User",
     },
+
+    // personal
     name: {
-      type: String,
+      type:     String,
       required: true,
-      trim: true,
+      trim:     true,
     },
     email: {
-      type: String,
+      type:     String,
       required: true,
       lowercase: true,
-      trim: true,
+      trim:     true,
     },
     password: {
-      type: String,
+      type:     String,
       required: true,
-      select: false,
-    },
-    role: {
-      type: String,
-      enum: ["COMPANY_ADMIN", "HR_MANAGER", "MANAGER", "EMPLOYEE"],
-      default: "EMPLOYEE",
-    },
-    designation: {
-      type: String,
-      required: true,
-      trim: true,
+      select:   false,
     },
     phone: {
       type: String,
@@ -72,17 +115,48 @@ const UserSchema = new Schema<IUser>(
     avatar: {
       type: String,
     },
+    dob: {
+      type: Date,
+    },
+    gender: {
+      type: String,
+      enum: Object.values(Gender),
+    },
+
+    // employment
+    role: {
+      type:    String,
+      enum:    Object.values(UserRole),
+      default: UserRole.EMPLOYEE,
+    },
+    designation: {
+      type:     String,
+      required: true,
+      trim:     true,
+    },
+    employmentType: {
+      type:    String,
+      enum:    Object.values(EmploymentType),
+      default: EmploymentType.FULL_TIME,
+    },
+    employmentStatus: {
+      type:    String,
+      enum:    Object.values(EmploymentStatus),
+      default: EmploymentStatus.ACTIVE,
+    },
+    joinDate: {
+      type:     Date,
+      required: true,
+    },
+
+    // auth
     isActive: {
-      type: Boolean,
+      type:    Boolean,
       default: true,
     },
     refreshToken: {
-      type: String,
+      type:   String,
       select: false,
-    },
-    joinDate: {
-      type: Date,
-      required: true,
     },
   },
   {
@@ -90,10 +164,13 @@ const UserSchema = new Schema<IUser>(
   }
 );
 
-// email must be unique within a company (not globally)
+// ─── Indexes ──────────────────────────────────────────────────────────────────
+
+// email unique per company — same email can exist in different companies
 UserSchema.index({ companyId: 1, email: 1 }, { unique: true });
 
-// hash password before saving
+// ─── Hooks ────────────────────────────────────────────────────────────────────
+
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   const salt = await bcrypt.genSalt(12);
@@ -101,11 +178,14 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-// compare plain password with hashed one
+// ─── Methods ──────────────────────────────────────────────────────────────────
+
 UserSchema.methods.comparePassword = async function (
   candidate: string
 ): Promise<boolean> {
   return bcrypt.compare(candidate, this.password);
 };
+
+// ─── Model ────────────────────────────────────────────────────────────────────
 
 export const User = mongoose.model<IUser>("User", UserSchema);

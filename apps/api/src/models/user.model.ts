@@ -1,33 +1,11 @@
 import mongoose, { Document, Schema } from "mongoose";
 import bcrypt from "bcryptjs";
-
-// ─── Enums ────────────────────────────────────────────────────────────────────
-
-export enum UserRole {
-  COMPANY_ADMIN = "COMPANY_ADMIN",
-  HR_MANAGER    = "HR_MANAGER",
-  MANAGER       = "MANAGER",
-  EMPLOYEE      = "EMPLOYEE",
-}
-
-export enum Gender {
-  MALE   = "MALE",
-  FEMALE = "FEMALE",
-  OTHER  = "OTHER",
-}
-
-export enum EmploymentType {
-  FULL_TIME  = "FULL_TIME",
-  PART_TIME  = "PART_TIME",
-  CONTRACT   = "CONTRACT",
-  INTERN     = "INTERN",
-}
-
-export enum EmploymentStatus {
-  ACTIVE     = "ACTIVE",
-  INACTIVE   = "INACTIVE",
-  TERMINATED = "TERMINATED",
-}
+import {
+  UserRole,
+  Gender,
+  EmploymentType,
+  EmploymentStatus,
+} from "../enums";
 
 // ─── Interface ────────────────────────────────────────────────────────────────
 
@@ -42,13 +20,13 @@ export interface IUser extends Document {
   managerId?:    mongoose.Types.ObjectId;
 
   // personal info
-  name:        string;
-  email:       string;
-  password:    string;
-  phone?:      string;
-  avatar?:     string;
-  dob?:        Date;
-  gender?:     Gender;
+  name:     string;
+  email:    string;
+  password: string;
+  phone?:   string;
+  avatar?:  string;
+  dob?:     Date;
+  gender?:  Gender;
 
   // employment info
   role:             UserRole;
@@ -73,15 +51,12 @@ export interface IUser extends Document {
 
 const UserSchema = new Schema<IUser>(
   {
-    // tenant
     companyId: {
       type:     Schema.Types.ObjectId,
       ref:      "Company",
       required: true,
       index:    true,
     },
-
-    // org structure
     departmentId: {
       type: Schema.Types.ObjectId,
       ref:  "Department",
@@ -90,18 +65,16 @@ const UserSchema = new Schema<IUser>(
       type: Schema.Types.ObjectId,
       ref:  "User",
     },
-
-    // personal
     name: {
       type:     String,
       required: true,
       trim:     true,
     },
     email: {
-      type:     String,
-      required: true,
+      type:      String,
+      required:  true,
       lowercase: true,
-      trim:     true,
+      trim:      true,
     },
     password: {
       type:     String,
@@ -122,8 +95,6 @@ const UserSchema = new Schema<IUser>(
       type: String,
       enum: Object.values(Gender),
     },
-
-    // employment
     role: {
       type:    String,
       enum:    Object.values(UserRole),
@@ -148,8 +119,6 @@ const UserSchema = new Schema<IUser>(
       type:     Date,
       required: true,
     },
-
-    // auth
     isActive: {
       type:    Boolean,
       default: true,
@@ -166,7 +135,6 @@ const UserSchema = new Schema<IUser>(
 
 // ─── Indexes ──────────────────────────────────────────────────────────────────
 
-// email unique per company — same email can exist in different companies
 UserSchema.index({ companyId: 1, email: 1 }, { unique: true });
 
 // ─── Hooks ────────────────────────────────────────────────────────────────────

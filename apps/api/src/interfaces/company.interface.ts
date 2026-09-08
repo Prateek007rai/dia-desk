@@ -10,8 +10,5 @@ export interface ICompany extends Document {
   industry?: string
   size?: CompanySize
   plan?: CompanyPlan
-  isActive ?: boolean
-  createdAt ?: Date
-  updatedAt ?: Date
-
+  isActive?: boolean
 }

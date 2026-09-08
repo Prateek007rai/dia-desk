@@ -36,10 +36,6 @@ export interface IUser extends Document {
   isActive: boolean;
   refreshToken?: string;
 
-  // timestamps
-  createdAt: Date;
-  updatedAt: Date;
-
   // methods
   comparePassword(candidate: string): Promise<boolean>;
 }

@@ -114,6 +114,7 @@
 - [ ] cors — allow requests from frontend url
 - [ ] helmet — adds security headers
 - [ ] morgan — logs every incoming request
+- ✅ mongodb uri — saved in apps/api/.env
 - [ ] mongodb connection — connect to atlas using MONGODB_URI from .env
 - [ ] env validation — fail at startup if any required env var is missing
 - [ ] confirm api runs on localhost:5000
@@ -129,8 +130,14 @@
 ---
 
 ## Backend — Auth
-- [ ] user model — name, email, password (hashed), role, department, joinDate
-- [ ] hash password on save — bcrypt pre-save hook in mongoose
+- ✅ enums — UserRole, Gender, EmploymentType, EmploymentStatus in src/enums/index.ts
+- ✅ user interface — IUser in src/interfaces/user.interface.ts
+- ✅ user model — name, email, password (hashed), role, department, joinDate
+- ✅ hash password on save — bcrypt pre-save hook in mongoose
+- ✅ company enums — CompanyPlan, CompanySize added to enums
+- ✅ company interface — ICompany in src/interfaces/company.interface.ts
+- ✅ company model — src/models/company.model.ts
+- [ ] department model
 - [ ] register — create user, return tokens
 - [ ] login — check password, return tokens
 - [ ] refresh token — issue new access token using refresh token

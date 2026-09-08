@@ -12,5 +12,8 @@
   },
   "devDependencies": {
     "turbo": "^2.0.0"
+  },
+  "dependencies": {
+    "mongoose": "^9.9.5"
   }
 }

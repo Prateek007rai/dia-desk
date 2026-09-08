@@ -23,3 +23,15 @@ export enum EmploymentStatus {
   INACTIVE   = "INACTIVE",
   TERMINATED = "TERMINATED",
 }
+
+export enum CompanyPlan {
+  FREE       = "FREE",
+  PRO        = "PRO",
+  ENTERPRISE = "ENTERPRISE",
+}
+
+export enum CompanySize {
+  SMALL  = "SMALL",  // 1 - 50
+  MEDIUM = "MEDIUM", // 51 - 200
+  LARGE  = "LARGE",  // 200+
+}

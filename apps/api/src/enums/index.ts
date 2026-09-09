@@ -35,3 +35,8 @@ export enum CompanySize {
   MEDIUM = "MEDIUM", // 51 - 200
   LARGE  = "LARGE",  // 200+
 }
+
+export enum DepartmentStatus {
+  ACTIVE = "ACTIVE",
+  ARCHIVED = "ARCHIVED",
+}

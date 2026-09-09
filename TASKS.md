@@ -137,7 +137,7 @@
 - ✅ company enums — CompanyPlan, CompanySize added to enums
 - ✅ company interface — ICompany in src/interfaces/company.interface.ts
 - ✅ company model — src/models/company.model.ts
-- [ ] department model
+- [/] department model
 - [ ] register — create user, return tokens
 - [ ] login — check password, return tokens
 - [ ] refresh token — issue new access token using refresh token

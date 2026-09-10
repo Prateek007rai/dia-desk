@@ -171,7 +171,7 @@
 ---
 
 ## Backend — Leaves
-- [/] leave policy model
+- ✅ leave policy model
 - [ ] leave model — employeeId, type, startDate, endDate, totalDays, status
 - [ ] apply — create new leave request, check for overlaps
 - [ ] get my leaves — all leaves for logged-in user

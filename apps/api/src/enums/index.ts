@@ -40,3 +40,24 @@ export enum DepartmentStatus {
   ACTIVE = "ACTIVE",
   ARCHIVED = "ARCHIVED",
 }
+
+export enum LeaveType {
+  PAID = "PAID",
+  SICK = "SICK",
+  CASUAL = "CASUAL",
+  MATERNITY = "MATERNITY",
+  UNPAID = "UNPAID",
+}
+
+export enum LeaveStatus {
+  PENDING = "PENDING",
+  APPROVED = "APPROVED",
+  REJECTED = "REJECTED",
+  CANCELLED = "CANCELLED",
+}
+
+export enum LeaveApprovalStatus {
+  PENDING = "PENDING",
+  APPROVED = "APPROVED",
+  REJECTED = "REJECTED",
+}

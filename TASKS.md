@@ -159,7 +159,7 @@
 ---
 
 ## Backend — Timesheets
-- [/] timesheet model — employeeId, date, project, task, hours, status, weekStart
+- ✅ timesheet model — employeeId, date, project, task, hours, status, weekStart
 - [ ] add entry — create a draft entry
 - [ ] get weekly — fetch all entries for a given week
 - [ ] submit week — change all drafts for that week to "submitted"

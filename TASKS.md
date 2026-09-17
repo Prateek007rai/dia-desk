@@ -184,6 +184,11 @@
 
 ---
 
+## Backend — Payroll
+- [/] salary model — companyId, employeeId, amount, currency, salaryType, effectiveDate
+
+---
+
 ## Shared Packages
 - [ ] packages/types — Employee, TimesheetEntry, LeaveRequest interfaces
 - [ ] packages/types — zod schemas used in both api validation and frontend forms

@@ -68,3 +68,9 @@ export enum TimesheetStatus {
   APPROVED = "APPROVED",
   REJECTED = "REJECTED",
 }
+
+export enum SalaryType {
+  MONTHLY = "MONTHLY",
+  ANNUAL = "ANNUAL",
+  HOURLY = "HOURLY",
+}

@@ -185,7 +185,7 @@
 ---
 
 ## Backend — Payroll
-- [/] salary model — companyId, employeeId, amount, currency, salaryType, effectiveDate
+- ✅ salary model — companyId, employeeId, amount, currency, salaryType, effectiveDate
 
 ---
 

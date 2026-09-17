@@ -5,3 +5,4 @@ export * from "./leavePolicy.model";
 export * from "./leaveBalance.model";
 export * from "./leaveRequest.model";
 export * from "./timesheetEntry.model";
+export * from "./salary.model";

@@ -157,7 +157,7 @@
 - [ ] test all endpoints in postman
 
 ## Backend — Projects
-- [/] project model — companyId, name, status, startDate, endDate, managerId
+- ✅ project model — companyId, name, status, startDate, endDate, managerId
 
 ---
 

@@ -6,3 +6,4 @@ export * from "./leaveBalance.model";
 export * from "./leaveRequest.model";
 export * from "./timesheetEntry.model";
 export * from "./salary.model";
+export * from "./project.model";

@@ -80,3 +80,8 @@ export enum ProjectStatus {
   ON_HOLD = "ON_HOLD",
   COMPLETED = "COMPLETED",
 }
+
+export enum HolidayType {
+  MANDATORY = "MANDATORY",
+  OPTIONAL = "OPTIONAL",
+}

@@ -174,6 +174,7 @@
 ---
 
 ## Backend — Leaves
+- [/] holiday model — companyId, name, date, type
 - ✅ leave policy model
 - ✅ leave balance model
 - ✅ leave request model — employeeId, type, startDate, endDate, totalDays, status

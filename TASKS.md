@@ -115,8 +115,8 @@
 - [ ] helmet — adds security headers
 - [ ] morgan — logs every incoming request
 - ✅ mongodb uri — saved in apps/api/.env
-- [/] mongodb connection — connect to atlas using MONGODB_URI from .env
-- [/] env validation — fail at startup if any required env var is missing
+- ✅ mongodb connection — connect to atlas using MONGODB_URI from .env
+- ✅ env validation — fail at startup if any required env var is missing
 - [ ] confirm api runs on localhost:5000
 
 ---

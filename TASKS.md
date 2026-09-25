@@ -109,11 +109,11 @@
 ## Backend Setup
 - [ ] package.json — dependencies: express, mongoose, jwt, bcrypt, cors, helmet, zod
 - [ ] tsconfig.json — typescript config for node
-- [ ] server.ts — starts the http server on PORT from .env
-- [ ] app.ts — express app, registers middleware and routes
-- [ ] cors — allow requests from frontend url
-- [ ] helmet — adds security headers
-- [ ] morgan — logs every incoming request
+- [/] server.ts — starts the http server on PORT from .env
+- [/] app.ts — express app, registers middleware and routes
+- [/] cors — allow requests from frontend url
+- [/] helmet — adds security headers
+- [/] morgan — logs every incoming request
 - ✅ mongodb uri — saved in apps/api/.env
 - ✅ mongodb connection — connect to atlas using MONGODB_URI from .env
 - ✅ env validation — fail at startup if any required env var is missing

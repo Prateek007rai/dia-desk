@@ -123,7 +123,7 @@
 
 ## Backend — Middlewares
 - ✅ error handler — catches all errors and sends clean json response
-- [ ] jwt auth — verifies token on protected routes
+- [/] jwt auth — verifies token on protected routes
 - [ ] role guard — blocks access if user role is not allowed
 - [ ] request validator — validates req.body using zod schema
 

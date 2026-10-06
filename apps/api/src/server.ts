@@ -1,6 +1,11 @@
 import app from "./app";
 import { env, connectDB } from "./config";
 
+/**
+ * Bootstraps the backend API server.
+ * Connects to the database and then starts the Express server listening on the configured port.
+ * Adds a handler for unhandled promise rejections to gracefully shutdown.
+ */
 const startServer = async () => {
   // Connect to the database first
   await connectDB();

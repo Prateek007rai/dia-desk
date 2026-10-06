@@ -15,7 +15,12 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 
-// Basic route for testing
+/**
+ * Basic health check endpoint to verify the API is responsive.
+ * 
+ * @route GET /health
+ * @returns {Object} 200 - OK status with a confirmation message.
+ */
 app.get("/health", (req: Request, res: Response) => {
   res.status(200).json({ status: "ok", message: "Dia Desk API is running" });
 });

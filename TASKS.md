@@ -129,6 +129,11 @@
 
 ---
 
+## Backend — Documentation
+- [/] add jsdoc comments to all functions (db, auth, server, error handler)
+
+---
+
 ## Backend — Auth
 - ✅ enums — UserRole, Gender, EmploymentType, EmploymentStatus in src/enums/index.ts
 - ✅ user interface — IUser in src/interfaces/user.interface.ts

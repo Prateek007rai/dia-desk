@@ -7,6 +7,16 @@ export interface CustomError extends Error {
   errors?: any;
 }
 
+/**
+ * Global error handling middleware for Express.
+ * Catches structured CustomErrors and formats them into a standard JSON response.
+ * Maps common Mongoose and JWT errors into the standard format.
+ * 
+ * @param {CustomError} err - The error object caught by the express router
+ * @param {Request} req - The Express request object
+ * @param {Response} res - The Express response object
+ * @param {NextFunction} next - The next middleware function
+ */
 export const errorHandler = (
   err: CustomError,
   req: Request,

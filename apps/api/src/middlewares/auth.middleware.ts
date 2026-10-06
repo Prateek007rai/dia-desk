@@ -13,6 +13,15 @@ declare global {
   }
 }
 
+/**
+ * Express middleware to protect routes requiring authentication.
+ * Checks for a Bearer token in the Authorization header, verifies the JWT,
+ * and attaches the decoded user document (excluding password) to req.user.
+ * 
+ * @param {Request} req - The Express request object, which will have user attached if successful.
+ * @param {Response} res - The Express response object.
+ * @param {NextFunction} next - The next middleware function.
+ */
 export const protect = async (req: Request, res: Response, next: NextFunction) => {
   let token;
 

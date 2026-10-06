@@ -130,7 +130,7 @@
 ---
 
 ## Backend — Documentation
-- [/] add jsdoc comments to all functions (db, auth, server, error handler)
+- ✅ add jsdoc comments to all functions (db, auth, server, error handler)
 
 ---
 

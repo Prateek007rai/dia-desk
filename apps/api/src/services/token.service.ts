@@ -18,3 +18,11 @@ export const generateRefreshToken = (payload: TokenPayload): string => {
     expiresIn: "7d",
   });
 };
+
+export const verifyAccessToken = (token: string): TokenPayload => {
+  return jwt.verify(token, env.JWT_SECRET) as TokenPayload;
+};
+
+export const verifyRefreshToken = (token: string): TokenPayload => {
+  return jwt.verify(token, env.JWT_REFRESH_SECRET) as TokenPayload;
+};

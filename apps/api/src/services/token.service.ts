@@ -8,11 +8,13 @@ export interface TokenPayload {
 }
 
 export const generateAccessToken = (payload: TokenPayload): string => {
-  // TODO: implement access token generation
-  return "";
+  return jwt.sign(payload, env.JWT_SECRET, {
+    expiresIn: "15m",
+  });
 };
 
 export const generateRefreshToken = (payload: TokenPayload): string => {
-  // TODO: implement refresh token generation
-  return "";
+  return jwt.sign(payload, env.JWT_REFRESH_SECRET, {
+    expiresIn: "7d",
+  });
 };

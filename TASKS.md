@@ -201,8 +201,8 @@
 ## Shared Packages
 - [ ] packages/types — Employee, TimesheetEntry, LeaveRequest interfaces
 - [ ] packages/types — zod schemas used in both api validation and frontend forms
-- [ ] packages/utils — getWeekStart, formatDate, getWorkingDays
-- [ ] packages/utils — getInitials, toTitleCase
+- ✅ packages/utils — getWeekStart, formatDate, getWorkingDays
+- ✅ packages/utils — getInitials, toTitleCase
 
 ---
 

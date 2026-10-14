@@ -143,6 +143,7 @@
 - ✅ company interface — ICompany in src/interfaces/company.interface.ts
 - ✅ company model — src/models/company.model.ts
 - ✅ department model
+- ✅ token service — generate and verify access & refresh tokens in src/services/token.service.ts
 - [ ] register — create user, return tokens
 - [ ] login — check password, return tokens
 - [ ] refresh token — issue new access token using refresh token

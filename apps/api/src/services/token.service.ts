@@ -55,3 +55,22 @@ export const verifyAccessToken = (token: string): TokenPayload => {
 export const verifyRefreshToken = (token: string): TokenPayload => {
   return jwt.verify(token, env.JWT_REFRESH_SECRET) as TokenPayload;
 };
+
+/**
+ * Safely decodes a JWT token without verifying its signature.
+ * Useful for inspecting payload data before validation or logging.
+ *
+ * @param {string} token - The JWT token to decode.
+ * @returns {TokenPayload | null} The decoded token payload or null if decoding fails.
+ */
+export const decodeToken = (token: string): TokenPayload | null => {
+  try {
+    const decoded = jwt.decode(token);
+    if (!decoded || typeof decoded === "string") {
+      return null;
+    }
+    return decoded as TokenPayload;
+  } catch {
+    return null;
+  }
+};

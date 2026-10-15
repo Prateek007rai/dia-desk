@@ -4,6 +4,7 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 
+import routes from "./routes";
 import { errorHandler } from "./middlewares/errorHandler";
 
 const app: Application = express();
@@ -24,6 +25,9 @@ app.use(morgan("dev"));
 app.get("/health", (req: Request, res: Response) => {
   res.status(200).json({ status: "ok", message: "Dia Desk API is running" });
 });
+
+// API Routes
+app.use("/api", routes);
 
 // Error handling middleware (must be after routes)
 app.use(errorHandler);

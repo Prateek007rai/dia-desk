@@ -23,3 +23,14 @@ export const registerSchema = z.object({
 });
 
 export type RegisterInput = z.infer<typeof registerSchema>;
+
+/**
+ * Validation schema for user login requests.
+ */
+export const loginSchema = z.object({
+  email: z.string().trim().toLowerCase().email("Invalid email address"),
+  password: z.string().min(1, "Password is required"),
+  companyId: z.string().optional(),
+});
+
+export type LoginInput = z.infer<typeof loginSchema>;

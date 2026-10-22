@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { register } from "../controllers/auth.controller";
+import { register, login } from "../controllers/auth.controller";
 import { validate } from "../middlewares/validate.middleware";
-import { registerSchema } from "../validations/auth.validation";
+import { registerSchema, loginSchema } from "../validations/auth.validation";
 
 const router = Router();
 
@@ -11,5 +11,12 @@ const router = Router();
  * @access Public
  */
 router.post("/register", validate(registerSchema), register);
+
+/**
+ * @route POST /api/auth/login
+ * @desc Authenticate user and return access & refresh tokens
+ * @access Public
+ */
+router.post("/login", validate(loginSchema), login);
 
 export default router;

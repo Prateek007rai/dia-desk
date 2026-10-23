@@ -1,6 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import { User } from "../models";
-import { generateAccessToken, generateRefreshToken } from "../services";
+import {
+  generateAccessToken,
+  generateRefreshToken,
+  verifyRefreshToken,
+} from "../services";
 import { CustomError } from "../middlewares/errorHandler";
 
 /**
@@ -195,3 +199,80 @@ export const login = async (
     next(error);
   }
 };
+
+/**
+ * Handles access token refreshment by verifying the refresh token,
+ * ensuring the user is active with a matching stored token, and issuing new tokens.
+ *
+ * @route POST /api/auth/refresh-token
+ * @param {Request} req - Express request object containing refresh token payload.
+ * @param {Response} res - Express response object.
+ * @param {NextFunction} next - Express next middleware function.
+ */
+export const refreshToken = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const { refreshToken: incomingRefreshToken } = req.body;
+
+    let decoded;
+    try {
+      decoded = verifyRefreshToken(incomingRefreshToken);
+    } catch {
+      const error = new Error("Invalid or expired refresh token") as CustomError;
+      error.statusCode = 401;
+      return next(error);
+    }
+
+    const user = await User.findById(decoded.id).select("+refreshToken");
+    if (!user) {
+      const error = new Error("User not found") as CustomError;
+      error.statusCode = 404;
+      return next(error);
+    }
+
+    if (!user.isActive) {
+      const error = new Error(
+        "Account is inactive. Please contact your administrator."
+      ) as CustomError;
+      error.statusCode = 403;
+      return next(error);
+    }
+
+    if (user.refreshToken !== incomingRefreshToken) {
+      const error = new Error("Invalid or expired refresh token") as CustomError;
+      error.statusCode = 401;
+      return next(error);
+    }
+
+    const accessToken = generateAccessToken({
+      id: user._id.toString(),
+      role: user.role,
+      companyId: user.companyId.toString(),
+    });
+
+    const newRefreshToken = generateRefreshToken({
+      id: user._id.toString(),
+      role: user.role,
+      companyId: user.companyId.toString(),
+    });
+
+    user.refreshToken = newRefreshToken;
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      data: {
+        tokens: {
+          accessToken,
+          refreshToken: newRefreshToken,
+        },
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+

@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { register, login } from "../controllers/auth.controller";
+import { register, login, refreshToken } from "../controllers/auth.controller";
 import { validate } from "../middlewares/validate.middleware";
-import { registerSchema, loginSchema } from "../validations";
+import { registerSchema, loginSchema, refreshTokenSchema } from "../validations";
 
 const router = Router();
 
@@ -19,4 +19,12 @@ router.post("/register", validate(registerSchema), register);
  */
 router.post("/login", validate(loginSchema), login);
 
+/**
+ * @route POST /api/auth/refresh-token
+ * @desc Refresh access token using a valid refresh token
+ * @access Public
+ */
+router.post("/refresh-token", validate(refreshTokenSchema), refreshToken);
+
 export default router;
+

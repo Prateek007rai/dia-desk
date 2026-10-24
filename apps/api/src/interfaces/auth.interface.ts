@@ -12,3 +12,19 @@ export interface AuthTokens {
 export interface RefreshTokenPayload {
   refreshToken: string;
 }
+
+/**
+ * Payload interface for user logout request.
+ */
+export interface LogoutPayload {
+  refreshToken?: string;
+}
+
+/**
+ * Standard response interface for logout action.
+ */
+export interface LogoutResponse {
+  success: boolean;
+  message: string;
+}
+

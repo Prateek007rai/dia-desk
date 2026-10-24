@@ -276,3 +276,40 @@ export const refreshToken = async (
   }
 };
 
+/**
+ * Handles user logout by clearing the stored refresh token in the database.
+ * Supports clearing via authenticated session (req.user) or matching refresh token.
+ *
+ * @route POST /api/auth/logout
+ * @param {Request} req - Express request object (contains req.user when protected).
+ * @param {Response} res - Express response object.
+ * @param {NextFunction} next - Express next middleware function.
+ */
+export const logout = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const userId = req.user?._id || req.user?.id;
+    const { refreshToken: incomingToken } = req.body || {};
+
+    if (userId) {
+      await User.findByIdAndUpdate(userId, { $unset: { refreshToken: 1 } });
+    } else if (incomingToken) {
+      await User.findOneAndUpdate(
+        { refreshToken: incomingToken },
+        { $unset: { refreshToken: 1 } }
+      );
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Logged out successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+

@@ -44,3 +44,13 @@ export const refreshTokenSchema = z.object({
 
 export type RefreshTokenInput = z.infer<typeof refreshTokenSchema>;
 
+/**
+ * Validation schema for user logout requests.
+ */
+export const logoutSchema = z.object({
+  refreshToken: z.string().optional(),
+});
+
+export type LogoutInput = z.infer<typeof logoutSchema>;
+
+

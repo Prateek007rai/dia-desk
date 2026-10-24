@@ -147,7 +147,7 @@
 - ✅ register — create user, return tokens
 - ✅ login — check password, return tokens
 - ✅ refresh token — issue new access token using refresh token
-- [ ] logout — clear refresh token in db
+- ✅ logout — clear refresh token in db
 - [ ] get me — return logged-in user's profile
 - [ ] test register in postman
 - [ ] test login in postman

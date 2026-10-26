@@ -326,7 +326,9 @@ export const getMe = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const user = await User.findById(req.user._id);
+    const user = await User.findById(req.user._id)
+      .populate("departmentId", "name")
+      .populate("managerId", "name email");
 
     if (!user) {
       const error = new Error("User not found") as CustomError;

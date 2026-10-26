@@ -28,3 +28,36 @@ export interface LogoutResponse {
   message: string;
 }
 
+/**
+ * User profile details returned by getMe endpoint.
+ */
+export interface UserProfile {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  companyId: string;
+  designation: string;
+  employmentType: string;
+  employmentStatus: string;
+  departmentId?: any;
+  managerId?: any;
+  phone?: string;
+  avatar?: string;
+  dob?: Date;
+  gender?: string;
+  joinDate: Date;
+  isActive: boolean;
+}
+
+/**
+ * Standard response interface for getMe endpoint.
+ */
+export interface GetMeResponse {
+  success: boolean;
+  data: {
+    user: UserProfile;
+  };
+}
+
+

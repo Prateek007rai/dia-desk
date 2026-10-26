@@ -312,4 +312,38 @@ export const logout = async (
   }
 };
 
+/**
+ * Retrieves the profile of the currently authenticated user.
+ *
+ * @route GET /api/auth/me
+ * @param {Request} req - Express request object containing authenticated user context.
+ * @param {Response} res - Express response object.
+ * @param {NextFunction} next - Express next middleware function.
+ */
+export const getMe = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      const error = new Error("User not found") as CustomError;
+      error.statusCode = 404;
+      return next(error);
+    }
+
+    res.status(200).json({
+      success: true,
+      data: {
+        user,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 

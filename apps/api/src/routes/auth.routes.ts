@@ -1,5 +1,11 @@
 import { Router } from "express";
-import { register, login, refreshToken, logout } from "../controllers/auth.controller";
+import {
+  register,
+  login,
+  refreshToken,
+  logout,
+  getMe,
+} from "../controllers/auth.controller";
 import { protect, validate } from "../middlewares";
 import {
   registerSchema,
@@ -38,6 +44,14 @@ router.post("/refresh-token", validate(refreshTokenSchema), refreshToken);
  */
 router.post("/logout", protect, validate(logoutSchema), logout);
 
+/**
+ * @route GET /api/auth/me
+ * @desc Retrieve current authenticated user profile
+ * @access Private
+ */
+router.get("/me", protect, getMe);
+
 export default router;
+
 
 

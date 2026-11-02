@@ -9,3 +9,5 @@ export * from "./salary.interface";
 export * from "./project.interface";
 export * from "./holiday.interface";
 export * from "./auth.interface";
+export * from "./employee.interface";
+

@@ -31,3 +31,30 @@ export const validate = (schema: ZodSchema) => {
     }
   };
 };
+
+/**
+ * Middleware factory to validate incoming request query parameters against a Zod schema.
+ * Replaces req.query with the sanitized parsed data on success, or forwards
+ * a structured 400 Bad Request error to the global errorHandler on validation failure.
+ *
+ * @param {ZodSchema} schema - The Zod schema to validate req.query against.
+ * @returns {(req: Request, res: Response, next: NextFunction) => Promise<void>} Express middleware function.
+ */
+export const validateQuery = (schema: ZodSchema) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const parsed = await schema.parseAsync(req.query);
+      req.query = parsed as any;
+      next();
+    } catch (error) {
+      if (error instanceof ZodError) {
+        const errorMessages = error.errors.map((issue) => `${issue.path.join(".")}: ${issue.message}`).join(", ");
+        const err = new Error(errorMessages || "Validation error") as CustomError;
+        err.statusCode = 400;
+        return next(err);
+      }
+      return next(error);
+    }
+  };
+};
+

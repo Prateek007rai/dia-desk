@@ -155,7 +155,7 @@
 ---
 
 ## Backend — Employees
-- [ ] get all — paginated list with department and role filter
+- ✅ get all — paginated list with department and role filter
 - [ ] get one — single employee by id
 - [ ] create — admin/hr only
 - [ ] update — change name, department, designation etc
